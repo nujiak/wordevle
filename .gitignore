@@ -1,2 +1,7 @@
 # VS Code configuration files
 .vscode
+
+# Node modules folder
+node_modules
+
+**/*.js

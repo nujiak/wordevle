@@ -1,3 +1,5 @@
+import { isWordInWordBank } from "./words/WordBank";
+
 enum Result {
   CORRECT,
   MISPLACED,
@@ -33,7 +35,7 @@ function isValidEntry(entry: string): boolean {
 }
 
 function isWordValid(word: string): boolean {
-  return true;
+  return isWordInWordBank(word.toLowerCase());
 }
 
 function submitEntry() {
