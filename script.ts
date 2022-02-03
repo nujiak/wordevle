@@ -16,7 +16,7 @@ class ResultBox {
   }
 }
 
-const word: string = "thorn".toUpperCase();
+let word: string = "HELLO";
 
 const answer: string[] = word.split("");
 
@@ -150,6 +150,21 @@ function setUpKeyboardInput() {
 }
 
 function init() {
+  const query = window.location.search;
+
+  const urlParams = new URLSearchParams(query);
+
+  if (urlParams.has("word")) {
+    const customWord = urlParams.get("word");
+
+    console.log(customWord);
+
+    if (isWordValid(customWord)) {
+      word = customWord.toUpperCase();
+      console.log(word);
+    }
+  }
+
   setupResultPanel();
   setUpKeyboardInput();
 }
