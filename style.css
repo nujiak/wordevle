@@ -29,7 +29,8 @@ body {
   display: flex;
   margin: 0.5rem;
   padding: 0rem;
-  aspect-ratio: 1 / 1;
+  height: 10vh;
+  width: 10vh;
   border-radius: 0.5rem;
   justify-content: center;
   align-items: center;
