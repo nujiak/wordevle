@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Signika:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Signika:wght@400;500&display=swap');
 
 body {
+  height: 95vh;
   display: flex;
   flex-wrap: wrap;
   background-color: lightgrey;
   justify-content: center;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #resultPanel {
   display: flex;
   flex-wrap: wrap;
+  align-self: flex-start;
   justify-content: center;
   width: 100%;
 }
@@ -49,4 +52,67 @@ body {
 
 .resultBox.misplaced {
   background-color: orange;
+}
+
+#keyboard {
+  display: flex;
+  flex: 1 1 0;
+  align-items: stretch;
+  flex-basis: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.keyboardRow {
+  display: flex;
+  flex: 1 1 0;
+  flex-basis: 100%;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0.3rem 0;
+}
+
+.keyboardKey {
+  transition-duration: 0.1s;
+  border: none;
+  border-radius: 0.3rem;
+  margin: 0 0.3rem;
+  align-items: stretch;
+  background-color: lightgrey;
+  box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.2),
+              -0.2rem -0.2rem 0.3rem rgba(255, 255, 255, 0.4),
+              inset 0 0 0 rgba(0, 0, 0, 0.1),
+              inset 0 0 0 rgba(255, 255, 255, 0.2);
+  font-family: 'Signika', sans-serif;
+  font-size: x-large;
+  font-weight: 400;
+  color: rbga(0, 0, 0, 0.1);
+}
+
+.keyboardKey:hover {
+  transition-duration: 0.1s;
+  box-shadow: 0.3rem 0.2rem 0.4rem rgba(0, 0, 0, 0.2),
+              -0.3rem -0.2rem 0.4rem rgba(255, 255, 255, 0.4),
+              inset 0 0 0 rgba(0, 0, 0, 0.1),
+              inset 0 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.keyboardKey:active {
+  transition-duration: 0.1s;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+              0 0 0 rgba(255, 255, 255, 0.4),
+              inset 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.1),
+              inset -0.2rem -0.2rem 0.3rem rgba(255, 255, 255, 0.2);
+}
+
+.letterKey {
+  flex: 1 1 0;
+}
+
+.keyboardMiddleRowSpacer {
+  flex: 1 1 0;
+}
+
+.largeKey {
+  flex: 2 2 0;
 }

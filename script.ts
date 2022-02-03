@@ -112,13 +112,11 @@ function deleteCharacter() {
   resultBoxes[results.length][currentEntry.length].label.innerText = ""
 }
 
-function inputCharacter(e: KeyboardEvent) {
+function inputCharacter(c: string) {
 
   if (isGameCompleted) {
     return;
   }
-
-  const c = e.key;
 
   if (c == "Backspace") {
     deleteCharacter();
@@ -146,7 +144,24 @@ function inputCharacter(e: KeyboardEvent) {
 }
 
 function setUpKeyboardInput() {
-  document.addEventListener("keyup", inputCharacter);
+  document.addEventListener("keyup", (e) => inputCharacter(e.key));
+}
+
+function setUpVirtualKeyboard() {
+  const buttons = document.getElementsByClassName("keyboardKey")
+  for (let i = 0; i < buttons.length; i++) {
+    const button = buttons[i];
+    if (button.id == "enter") {
+      // Enter button
+      button.addEventListener("click", submitEntry);
+    } else if (button.id == "backspace") {
+      // Backspace button
+      button.addEventListener("click", deleteCharacter);
+    } else {
+      // Letter button, fetch character from id
+      button.addEventListener("click", () => inputCharacter(button.id.toUpperCase()))
+    }
+  }
 }
 
 function init() {
@@ -156,7 +171,7 @@ function init() {
 
   if (urlParams.has("word")) {
     const customWord = urlParams.get("word");
-    
+
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
     }
@@ -164,6 +179,7 @@ function init() {
 
   setupResultPanel();
   setUpKeyboardInput();
+  setUpVirtualKeyboard();
 }
 
 init()
