@@ -156,12 +156,9 @@ function init() {
 
   if (urlParams.has("word")) {
     const customWord = urlParams.get("word");
-
-    console.log(customWord);
-
+    
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
-      console.log(word);
     }
   }
 
