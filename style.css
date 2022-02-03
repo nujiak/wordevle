@@ -29,8 +29,8 @@ body {
   display: flex;
   margin: 0.5rem;
   padding: 0rem;
-  height: 10vh;
-  width: 10vh;
+  height: 10vmin;
+  width: 10vmin;
   border-radius: 0.5rem;
   justify-content: center;
   align-items: center;
