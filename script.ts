@@ -4,40 +4,70 @@ enum Result {
   WRONG,
 }
 
-const word: String = "kaijun";
+class ResultBox {
+  box: HTMLDivElement;
+  label: HTMLHeadingElement;
 
-const answer: String[] = word.split("");
+  constructor(box: HTMLDivElement, label: HTMLHeadingElement) {
+    this.box = box;
+    this.label = label;
+  }
+}
+
+const word: string = "thorn".toUpperCase();
+
+const answer: string[] = word.split("");
 
 const maxAttempts: number = 6;
 
 const results: Result[][] = [];
 
-const resultBoxes: HTMLElement[][] = [];
+const resultBoxes: ResultBox[][] = [];
+
+const currentEntry: string[] = [];
+
+let isGameCompleted: boolean = false;
 
 function isValidEntry(entry: string): boolean {
   return entry.length == word.length
 }
 
-function addNewEntry(entry: string): Result[] {
-  if (!isValidEntry(entry)) {
-    return null;
+function isWordValid(word: string): boolean {
+  return true;
+}
+
+function submitEntry() {
+  if (currentEntry.length < word.length) {
+    return;
+  }
+
+  if (!isWordValid(currentEntry.join(""))) {
+    alert("Invalid word");
+    return;
   }
   const attemptNumber = results.length;
   const result: Result[] = [];
-  const entryArr: string[] = entry.split("");
+
+  isGameCompleted = true;
+
   for (let i = 0; i < word.length; i++) {
-    if (entryArr[i] == word.charAt(i)) {
+    if (currentEntry[i] == word.charAt(i)) {
       result[i] = Result.CORRECT;
-      resultBoxes[attemptNumber][i].classList.add("correct");
-    } else if (word.includes(entryArr[i])) {
+      resultBoxes[attemptNumber][i].box.classList.add("correct");
+    } else if (word.includes(currentEntry[i])) {
       result[i] = Result.MISPLACED;
-      resultBoxes[attemptNumber][i].classList.add("misplaced");
+      resultBoxes[attemptNumber][i].box.classList.add("misplaced");
+      isGameCompleted = false;
     } else {
       result[i] = Result.WRONG;
-      resultBoxes[attemptNumber][i].classList.add("wrong");
+      resultBoxes[attemptNumber][i].box.classList.add("wrong");
+      isGameCompleted = false;
     }
   }
   results.push(result);
+
+  currentEntry.length = 0;
+
   return result;
 }
 
@@ -54,30 +84,72 @@ function setupResultPanel() {
 
     // Populate row
     for (let j = 0; j < word.length; j++) {
-      const resultBox = document.createElement("p");
+      const resultBox = document.createElement("div");
       resultBox.classList.add("resultBox");
+
+      const resultLabel = document.createElement("h1");
+      resultLabel.classList.add("resultLabel");
+
+      resultBox.appendChild(resultLabel);
       resultRow.appendChild(resultBox);
 
       // Save resultBox
-      resultBoxes[i][j] = resultBox;
+      resultBoxes[i][j] = new ResultBox(resultBox, resultLabel);
     }
 
     resultPanel.appendChild(resultRow);
   }
 }
 
-function setupInput() {
-  console.log("Setting up input");
-  document.getElementById("entrySubmit").addEventListener("click", () => {
-    const entry = (<HTMLInputElement> document.getElementById("entryInput")).value;
-    addNewEntry(entry);
-    console.log(entry);
-  });
+function deleteCharacter() {
+  if (currentEntry.length === 0) {
+    return;
+  }
+
+  currentEntry.pop();
+  resultBoxes[results.length][currentEntry.length].label.innerText = ""
+}
+
+function inputCharacter(e: KeyboardEvent) {
+
+  if (isGameCompleted) {
+    return;
+  }
+
+  const c = e.key;
+
+  if (c == "Backspace") {
+    deleteCharacter();
+  }
+
+  if (c == "Enter") {
+    submitEntry();
+  }
+
+  if (!/^[a-zA-Z]$/.test(c)) {
+    return;
+  }
+
+  if (results.length >= maxAttempts) {
+    return;
+  }
+
+  if (currentEntry.length >= word.length) {
+    return;
+  }
+
+  currentEntry.push(c.toUpperCase());
+
+  resultBoxes[results.length][currentEntry.length - 1].label.innerText = c.toUpperCase()
+}
+
+function setUpKeyboardInput() {
+  document.addEventListener("keyup", inputCharacter);
 }
 
 function init() {
   setupResultPanel();
-  setupInput();
+  setUpKeyboardInput();
 }
 
 init()
