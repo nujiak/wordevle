@@ -67,7 +67,7 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 60%;
+  width: 90%;
   height: 60%;
   flex-wrap: wrap;
   justify-content: center;
@@ -92,6 +92,7 @@ body {
 #setUpWordInput {
   flex-basis: 100%;
   padding: 0.2rem;
+  width: 50vw;
   margin: 0 5rem;
   background-color: transparent;
   border: 0.1rem solid gray;
@@ -168,6 +169,7 @@ body {
   padding: 0;
   margin: 1vh 0 0 0;
   user-select: none;
+  cursor: pointer;
 }
 
 #tagline {
@@ -175,6 +177,7 @@ body {
   text-align: center;
   font-size: small;
   margin: -1vh 0 0 0;
+  cursor: pointer;
 }
 
 #resultPanel {
