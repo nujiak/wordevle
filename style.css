@@ -1,22 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Signika:wght@400;500&display=swap');
 
 body {
-  height: 90vh;
-  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0;
   flex-wrap: wrap;
   background-color: lightgrey;
   justify-content: center;
   align-items: stretch;
   color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 #resultPanel {
   display: flex;
-  min-height: 70vh;
+  height: 70vh;
   flex-wrap: wrap;
   align-self: flex-start;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  overflow: auto;
 }
 
 .resultRow {
@@ -43,13 +47,14 @@ body {
   color: rgba(0, 0, 0, 0.87);
   font-family: 'Exo', sans-serif;
   user-select: none;
+  font-size: 4vh;
 }
 
 #keyboard {
   display: flex;
   flex: 1 1 0;
+  height: 30vh;
   align-items: stretch;
-  flex-basis: 100%;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -59,7 +64,7 @@ body {
   flex: 1 1 0;
   flex-basis: 100%;
   align-items: stretch;
-  justify-content: center;
+  justify-content: stretch;
   margin: 0.3rem 0;
 }
 
@@ -69,13 +74,14 @@ body {
   border-radius: 0.3rem;
   margin: 0 0.3rem;
   align-items: stretch;
+  padding: 0;
   background-color: lightgrey;
   box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.2),
               -0.2rem -0.2rem 0.3rem rgba(255, 255, 255, 0.4),
               inset 0 0 0 rgba(0, 0, 0, 0.1),
               inset 0 0 0 rgba(255, 255, 255, 0.2);
   font-family: 'Signika', sans-serif;
-  font-size: x-large;
+  font-size: 3vh;
   font-weight: 400;
   color: rbga(0, 0, 0, 0.1);
   user-select: none;
@@ -118,7 +124,6 @@ body {
 .misplaced {
   background-color: orange;
 }
-
 
 .wrong {
   background-color: grey;
