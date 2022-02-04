@@ -1,3 +1,4 @@
+import { decrypt, encrypt } from "./security/AesCbc";
 import { isWordInWordBank } from "./words/WordBank";
 
 enum Result {
@@ -253,8 +254,11 @@ function submitSetUpOptions() {
 
   if (isWordValid(customWordField.value.trim())) {
     const url = new URL(window.location.origin);
-    url.searchParams.append("word", customWordField.value.trim());
-    window.location.assign(url);
+
+    const searchParams = new URLSearchParams();
+    searchParams.append("word", customWordField.value.trim());
+    const encodedParams = encrypt(searchParams.toString());
+    window.location.assign(url + "?" + encodedParams);
   } else {
     showError("Invalid word", 3000);
   }
@@ -262,10 +266,14 @@ function submitSetUpOptions() {
 }
 
 function init() {
+
+  require('dotenv').config();
+
   let hasCustomWord: boolean = false;
 
   const query = window.location.search;
-  const urlParams = new URLSearchParams(query);
+  const encryptedParams = query.slice(1)
+  const urlParams = new URLSearchParams(decrypt(encryptedParams));
 
   if (urlParams.has("word")) {
     const customWord:string = urlParams.get("word");

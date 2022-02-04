@@ -22,16 +22,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-      # Transpile Typescript files
-      - name: Transpile Typescript
+      # Build website
+      - name: Build page
         run: |
-          npm install typescript
-          tsc
-      # Bundle node modules with Browserify
-      - name: Browserify
-        run: |
+          npm install
+          npm run tsc
           npm install browserify -g
-          browserify script.js -o bundle.js
+          npm run browserify
+        env:
+          QUERY_ENCRYPTION_KEY: ${{ secrets.QUERY_ENCRYPTION_KEY }}
       - name: Move files
         run: |
           shopt -s extglob
