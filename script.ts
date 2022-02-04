@@ -240,7 +240,9 @@ function openCustomWordForm() {
 
   document.getElementById("setUpSubmit").addEventListener("click", () => {
     if (isWordValid(customWordField.value.trim())) {
-      // TODO: Redirect user to new link
+      const url = new URL(window.location.origin);
+      url.searchParams.append("word", customWordField.value.trim());
+      window.location.assign(url);
     } else {
       showError("Invalid word", 3000);
     }
