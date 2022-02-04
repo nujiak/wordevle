@@ -236,17 +236,29 @@ function showError(errorMsg: string, duration: number) {
 function openCustomWordForm() {
   document.getElementById("setUpBox").classList.add("shown");
 
+  // Submit on clicking button
+  document.getElementById("setUpSubmit").addEventListener("click", submitSetUpOptions);
+
+  // Submit on pressing enter on keyboard
+  document.addEventListener("keyup", (e) => {
+    console.log(e.key);
+    if (e.key === "Enter") {
+      submitSetUpOptions();
+    }
+  });
+}
+
+function submitSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
 
-  document.getElementById("setUpSubmit").addEventListener("click", () => {
-    if (isWordValid(customWordField.value.trim())) {
-      const url = new URL(window.location.origin);
-      url.searchParams.append("word", customWordField.value.trim());
-      window.location.assign(url);
-    } else {
-      showError("Invalid word", 3000);
-    }
-  })
+  if (isWordValid(customWordField.value.trim())) {
+    const url = new URL(window.location.origin);
+    url.searchParams.append("word", customWordField.value.trim());
+    window.location.assign(url);
+  } else {
+    showError("Invalid word", 3000);
+  }
+
 }
 
 function init() {
@@ -262,6 +274,14 @@ function init() {
       hasCustomWord = true;
     }
   }
+
+  document.getElementById("title").addEventListener("click", () => {
+    window.location.assign(window.location.origin);
+  });
+
+  document.getElementById("tagline").addEventListener("click", () => {
+    window.location.assign(window.location.origin);
+  });
 
   if (hasCustomWord) {
     setupResultPanel();
