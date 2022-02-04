@@ -134,6 +134,69 @@ body {
               inset -1vmin -1vmin 1vmin rgba(255, 255, 255, 0.2);
 }
 
+#gameOverBox {
+  display: flex;
+  flex-wrap: wrap;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  min-width: 50vw;
+  min-height: 50vh;
+  transform: translate(-50%, -50%) scale(0, 0);
+  background-color: lightgray;
+  filter: drop-shadow(5vmin 5vmin 5vmin rgba(0, 0, 0, 0.3));
+  border-radius: 5vmin;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#gameOverBox.shown {
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transform: translate(-50%, -50%) scale(100%, 100%);
+}
+
+#gameOverAnswer {
+  font-style: italic;
+}
+
+#share {
+  background-color: lightgray;
+  border: none;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  font-family: 'Signika', sans-serif;
+  font-size: large;
+  border-radius: 2vmin;
+  padding: 2vh 2vw;
+  box-shadow: 1vmin 1vmin 1.5vmin rgba(0, 0, 0, 0.1),
+              -1vmin -1vmin 1.5vmin rgba(255, 255, 255, 0.2),
+              inset 0 0 0 rgba(0, 0, 0, 0.1),
+              inset -0 -0 0 rgba(255, 255, 255, 0.2);
+}
+
+#share:hover {
+transition-duration: 100ms;
+box-shadow: 0.5vmin 0.5vmin 1.0vmin rgba(0, 0, 0, 0.2),
+            -0.5vmin -0.5vmin 1.0vmin rgba(255, 255, 255, 0.4),
+            inset 0 0 0 rgba(0, 0, 0, 0.1),
+            inset -0 -0 0 rgba(255, 255, 255, 0.2);
+}
+
+#share:active {
+transition-duration: 100ms;
+box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+            -0 -0 0 rgba(255, 255, 255, 0.4),
+            inset 1vmin 1vmin 1vmin rgba(0, 0, 0, 0.1),
+            inset -1vmin -1vmin 1vmin rgba(255, 255, 255, 0.2);
+}
+
+.gameOverText {
+  flex-basis: 100%;
+  text-align: center;
+}
+
 #errorBox {
   transition-duration: 100ms;
   transition-timing-function: ease-in-out;

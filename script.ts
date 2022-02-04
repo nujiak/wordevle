@@ -91,6 +91,7 @@ function submitEntry() {
   // Check for greens
   currentEntry.forEach((character, index) => {
     if (character === wordArr[index]) {
+      result[index] = Result.CORRECT;
       resultBoxes[attemptNumber][index].box.classList.add(Result.CORRECT);
       setKeyboardResult(character, Result.CORRECT);
 
@@ -102,6 +103,7 @@ function submitEntry() {
   // Check remainders for yellows
   currentEntry.forEach((character, index) => {
     if (character != null && wordArr.includes(character)) {
+      result[index] = Result.MISPLACED;
       resultBoxes[attemptNumber][index].box.classList.add(Result.MISPLACED);
       setKeyboardResult(character, Result.MISPLACED);
 
@@ -121,10 +123,64 @@ function submitEntry() {
   });
 
   results.push(result);
+  console.log(result);
+  console.log(results);
+
+  if (results.length == maxAttempts) {
+    isGameCompleted = true;
+  }
+
+  if (isGameCompleted) {
+    showGameOver();
+  }
 
   currentEntry.length = 0;
 
   return result;
+}
+
+function showGameOver() {
+  const isLost = results[results.length - 1].includes(Result.MISPLACED) || results[results.length - 1].includes(Result.WRONG);
+
+  const gameOverBox = document.getElementById("gameOverBox");
+  gameOverBox.style.display = "flex";
+  gameOverBox.classList.add("shown");
+
+  if (isLost) {
+    document.getElementById("gameOverCongratulate").style.display = "none";
+  } else {
+    document.getElementById("gameOverReveal").style.display = "none";
+  }
+
+  document.getElementById("gameOverAnswer").innerText = word.toLowerCase();
+
+  document.getElementById("share").addEventListener("click", () => {
+    navigator.share({ text: getShareMessage() });
+  })
+}
+
+function getShareMessage(): string {
+  let message = `Wordevle ${results.length}/${maxAttempts}\n`;
+  console.log(results);
+
+  for (let i = 0; i < results.length; i++) {
+    const row = results[i];
+    console.log(row);
+    for (let j = 0; j < row.length; j++) {
+      const result = row[j];
+      console.log(result);
+      message += (result === Result.CORRECT
+        ? "🟩"
+        : result === Result.MISPLACED
+          ? "🟨"
+          : "⬜")
+    }
+    message += "\n";
+  }
+
+  message += `\nChallenge my score at ${window.location.href}`
+
+  return message;
 }
 
 function setupResultPanel() {
@@ -262,7 +318,6 @@ function submitSetUpOptions() {
   } else {
     showError("Invalid word", 3000);
   }
-
 }
 
 function init() {
