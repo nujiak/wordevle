@@ -1,9 +1,9 @@
 import { isWordInWordBank } from "./words/WordBank";
 
 enum Result {
-  CORRECT,
-  MISPLACED,
-  WRONG,
+  CORRECT = "correct",
+  MISPLACED = "misplaced",
+  WRONG = "wrong",
 }
 
 class ResultBox {
@@ -26,6 +26,8 @@ const results: Result[][] = [];
 
 const resultBoxes: ResultBox[][] = [];
 
+const keyboardKeys: HTMLButtonElement[] = [];
+
 const currentEntry: string[] = [];
 
 let isGameCompleted: boolean = false;
@@ -36,6 +38,37 @@ function isValidEntry(entry: string): boolean {
 
 function isWordValid(word: string): boolean {
   return isWordInWordBank(word.toLowerCase());
+}
+
+function getIndex(c: string): number {
+  return c.toUpperCase().charCodeAt(0) - 65;
+}
+
+function setKeyboardResult(c: string, result: Result) {
+
+  const key = keyboardKeys[getIndex(c)];
+
+  if (key.classList.contains(result) || key.classList.contains(Result.CORRECT)) {
+    return;
+  }
+
+  if (result === Result.CORRECT) {
+    key.classList.remove(Result.MISPLACED);
+    key.classList.remove(Result.WRONG);
+    key.classList.add(Result.CORRECT);
+    return;
+  }
+
+  if (result == Result.MISPLACED) {
+    key.classList.remove(Result.WRONG);
+    key.classList.add(Result.MISPLACED);
+    return;
+  }
+
+  if (result == Result.WRONG && !key.classList.contains(Result.MISPLACED)) {
+    key.classList.add(Result.WRONG);
+    return;
+  }
 }
 
 function submitEntry() {
@@ -57,7 +90,8 @@ function submitEntry() {
   // Check for greens
   currentEntry.forEach((character, index) => {
     if (character === wordArr[index]) {
-      resultBoxes[attemptNumber][index].box.classList.add("correct");
+      resultBoxes[attemptNumber][index].box.classList.add(Result.CORRECT);
+      setKeyboardResult(character, Result.CORRECT);
 
       wordArr[index] = null;
       currentEntry[index] = null;
@@ -67,7 +101,8 @@ function submitEntry() {
   // Check remainders for yellows
   currentEntry.forEach((character, index) => {
     if (character != null && wordArr.includes(character)) {
-      resultBoxes[attemptNumber][index].box.classList.add("misplaced");
+      resultBoxes[attemptNumber][index].box.classList.add(Result.MISPLACED);
+      setKeyboardResult(character, Result.MISPLACED);
 
       wordArr[wordArr.indexOf(character)] = null;
       currentEntry[index] = null;
@@ -78,7 +113,8 @@ function submitEntry() {
   currentEntry.forEach((character, index) => {
     if (character != null) {
       result[index] = Result.WRONG;
-      resultBoxes[attemptNumber][index].box.classList.add("wrong");
+      resultBoxes[attemptNumber][index].box.classList.add(Result.WRONG);
+      setKeyboardResult(character, Result.WRONG);
       isGameCompleted = false;
     }
   });
@@ -178,6 +214,10 @@ function setUpVirtualKeyboard() {
       // Letter button, fetch character from id
       button.addEventListener("click", () => inputCharacter(button.id.toUpperCase()))
     }
+  }
+
+  for (let i = 97; i <= 122; i++) {
+    keyboardKeys[i - 97] = <HTMLButtonElement> document.getElementById(String.fromCharCode(i));
   }
 }
 

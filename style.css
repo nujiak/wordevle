@@ -44,18 +44,6 @@ body {
   font-family: 'Exo', sans-serif;
 }
 
-.resultBox.correct {
-  background-color: green;
-}
-
-.resultBox.wrong {
-  background-color: grey;
-}
-
-.resultBox.misplaced {
-  background-color: orange;
-}
-
 #keyboard {
   display: flex;
   flex: 1 1 0;
@@ -117,4 +105,17 @@ body {
 
 .largeKey {
   flex: 2 2 0;
+}
+
+.correct {
+  background-color: green;
+}
+
+.misplaced {
+  background-color: orange;
+}
+
+
+.wrong {
+  background-color: grey;
 }
