@@ -269,6 +269,12 @@ function init() {
 
   require('dotenv').config();
 
+  const loadingScreen = document.getElementById("loadingScreen");
+  loadingScreen.classList.add("hidden");
+  setTimeout(() => {
+    loadingScreen.style.display = "none";
+  }, 500);
+
   let hasCustomWord: boolean = false;
 
   const query = window.location.search;

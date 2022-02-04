@@ -13,6 +13,55 @@ body {
   font-family: 'Signika', sans-serif;
 }
 
+@keyframes loading {
+  0% {
+    transform: scale(100%, 100%);
+  }
+  33% {
+    transform: scale(110%, 110%);
+  }
+  67% {
+    transform: scale(90%, 90%);
+  }
+  100% {
+    transform: scale(100%, 100%);
+  }
+}
+
+#loadingScreen {
+  top: 0;
+  left: 0;
+  margin: 0;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: lightgrey;
+  z-index: 3;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#loadingScreen.hidden {
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transform: translate(0, -100%);
+}
+
+#loadingLogo {
+  text-align: center;
+  flex-basis: 100%;
+  font-size: 20vmin;
+  margin-top: 20vh;
+  animation: 5s ease-in-out 0s infinite normal none running loading;
+}
+
+#loadingDescription {
+  font-size: 5vmin;
+  font-weight: 400;
+}
+
 #setUpBox {
   display: none;
   position: fixed;
