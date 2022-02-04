@@ -10,11 +10,34 @@ body {
   align-items: stretch;
   color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  font-family: 'Signika', sans-serif;
+}
+
+#header {
+  display: flex;
+  height: 10%;
+  flex-wrap: wrap;
+  user-select: none;
+}
+
+#title {
+  flex-basis: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 1vh 0 0 0;
+  user-select: none;
+}
+
+#tagline {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: small;
+  margin: -1vh 0 0 0;
 }
 
 #resultPanel {
   display: flex;
-  height: 70vh;
+  height: 60vh;
   flex-wrap: wrap;
   align-self: flex-start;
   justify-content: center;
