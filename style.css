@@ -13,6 +13,77 @@ body {
   font-family: 'Signika', sans-serif;
 }
 
+#setUpBox {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10vmin;
+  transform: translate(-50%, -50%);
+  background-color: lightgray;
+  filter: drop-shadow(5vmin 5vmin 10vmin rgba(0, 0, 0, 0.5));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#setUpBox.shown {
+  display: flex;
+}
+
+#setUpTitle {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+#setUpWordInput {
+  flex-basis: 100%;
+  padding: 0.2rem;
+  margin: 0 5rem;
+  background-color: transparent;
+  border: 0.1rem solid gray;
+  border-radius: 0.5rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Signika', sans-serif;
+  font-size: xx-large;
+  text-align: center;
+}
+
+#setUpSubmit {
+  transition-duration: 300ms;
+  padding: 3vmin 6vmin;
+  background-color: lightgray;
+  border: none;
+  border-radius: 0.5vmin;
+  box-shadow: 1vmin 1vmin 1.5vmin rgba(0, 0, 0, 0.1),
+              -1vmin -1vmin 1.5vmin rgba(255, 255, 255, 0.2),
+              inset 0 0 0 rgba(0, 0, 0, 0.1),
+              inset -0 -0 0 rgba(255, 255, 255, 0.2);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Signika', sans-serif;
+  font-size: x-large;
+}
+
+#setUpSubmit:hover {
+  transition-duration: 300ms;
+  box-shadow: 0.5vmin 0.5vmin 1.0vmin rgba(0, 0, 0, 0.2),
+              -0.5vmin -0.5vmin 1.0vmin rgba(255, 255, 255, 0.4),
+              inset 0 0 0 rgba(0, 0, 0, 0.1),
+              inset -0 -0 0 rgba(255, 255, 255, 0.2);
+}
+
+#setUpSubmit:active {
+  transition-duration: 100ms;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+              -0 -0 0 rgba(255, 255, 255, 0.4),
+              inset 1vmin 1vmin 1vmin rgba(0, 0, 0, 0.1),
+              inset -1vmin -1vmin 1vmin rgba(255, 255, 255, 0.2);
+}
+
 #errorBox {
   transition-duration: 100ms;
   transition-timing-function: ease-in-out;

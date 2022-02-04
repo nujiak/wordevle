@@ -227,29 +227,47 @@ function showError(errorMsg: string, duration: number) {
 
   errorLabel.innerText = errorMsg;
 
-  let translateY = -100;
   errorBox.classList.add("shown");
   setTimeout(() => {
     errorBox.classList.remove("shown");
   }, duration);
 }
 
-function init() {
-  const query = window.location.search;
+function openCustomWordForm() {
+  document.getElementById("setUpBox").classList.add("shown");
 
+  const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
+
+  document.getElementById("setUpSubmit").addEventListener("click", () => {
+    if (isWordValid(customWordField.value.trim())) {
+      // TODO: Redirect user to new link
+    } else {
+      showError("Invalid word", 3000);
+    }
+  })
+}
+
+function init() {
+  let hasCustomWord: boolean = false;
+
+  const query = window.location.search;
   const urlParams = new URLSearchParams(query);
 
   if (urlParams.has("word")) {
-    const customWord = urlParams.get("word");
-
+    const customWord:string = urlParams.get("word");
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
+      hasCustomWord = true;
     }
   }
 
-  setupResultPanel();
-  setUpKeyboardInput();
-  setUpVirtualKeyboard();
+  if (hasCustomWord) {
+    setupResultPanel();
+    setUpKeyboardInput();
+    setUpVirtualKeyboard();
+  } else {
+    openCustomWordForm();
+  }
 }
 
 init()
