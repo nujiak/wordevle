@@ -77,7 +77,7 @@ function submitEntry() {
   }
 
   if (!isWordValid(currentEntry.join(""))) {
-    alert("Invalid word");
+    showError("Invalid word", 2000)
     return;
   }
   const attemptNumber = results.length;
@@ -219,6 +219,19 @@ function setUpVirtualKeyboard() {
   for (let i = 97; i <= 122; i++) {
     keyboardKeys[i - 97] = <HTMLButtonElement> document.getElementById(String.fromCharCode(i));
   }
+}
+
+function showError(errorMsg: string, duration: number) {
+  const errorBox = document.getElementById("errorBox");
+  const errorLabel = document.getElementById("errorMessage");
+
+  errorLabel.innerText = errorMsg;
+
+  let translateY = -100;
+  errorBox.classList.add("shown");
+  setTimeout(() => {
+    errorBox.classList.remove("shown");
+  }, duration);
 }
 
 function init() {

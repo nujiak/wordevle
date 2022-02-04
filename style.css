@@ -13,6 +13,28 @@ body {
   font-family: 'Signika', sans-serif;
 }
 
+#errorBox {
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+  position: fixed;
+  padding: 0vh 2vw;
+  border-radius: 1vh;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: gray;
+  box-shadow: 0.2vh 0.2vh 0.4vh rgba(0, 0, 0, 0.4),
+              -0.2vh -0.2vh 0.4vh rgba(255, 255, 255, 0.6);
+  top: 1vh;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -150%);
+}
+
+#errorBox.shown {
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+  transform: translate(-50%, 0);
+}
+
 #header {
   display: flex;
   height: 10%;
