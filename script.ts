@@ -52,20 +52,37 @@ function submitEntry() {
 
   isGameCompleted = true;
 
-  for (let i = 0; i < word.length; i++) {
-    if (currentEntry[i] == word.charAt(i)) {
-      result[i] = Result.CORRECT;
-      resultBoxes[attemptNumber][i].box.classList.add("correct");
-    } else if (word.includes(currentEntry[i])) {
-      result[i] = Result.MISPLACED;
-      resultBoxes[attemptNumber][i].box.classList.add("misplaced");
-      isGameCompleted = false;
-    } else {
-      result[i] = Result.WRONG;
-      resultBoxes[attemptNumber][i].box.classList.add("wrong");
+  const wordArr: string[] = word.split("");
+
+  // Check for greens
+  currentEntry.forEach((character, index) => {
+    if (character === wordArr[index]) {
+      resultBoxes[attemptNumber][index].box.classList.add("correct");
+
+      wordArr[index] = null;
+      currentEntry[index] = null;
+    }
+  });
+
+  // Check remainders for yellows
+  currentEntry.forEach((character, index) => {
+    if (character != null && wordArr.includes(character)) {
+      resultBoxes[attemptNumber][index].box.classList.add("misplaced");
+
+      wordArr[wordArr.indexOf(character)] = null;
+      currentEntry[index] = null;
+    }
+  });
+
+  // Mark remainders as red
+  currentEntry.forEach((character, index) => {
+    if (character != null) {
+      result[index] = Result.WRONG;
+      resultBoxes[attemptNumber][index].box.classList.add("wrong");
       isGameCompleted = false;
     }
-  }
+  });
+
   results.push(result);
 
   currentEntry.length = 0;
