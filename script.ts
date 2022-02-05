@@ -143,7 +143,6 @@ function showGameOver() {
   const isLost = results[results.length - 1].includes(Result.MISPLACED) || results[results.length - 1].includes(Result.WRONG);
 
   const gameOverBox = document.getElementById("gameOverBox");
-  gameOverBox.style.display = "flex";
   gameOverBox.classList.add("shown");
 
   if (isLost) {
@@ -154,8 +153,19 @@ function showGameOver() {
 
   document.getElementById("gameOverAnswer").innerText = word.toLowerCase();
 
+  const message = getShareMessage();
+
   document.getElementById("share").addEventListener("click", () => {
-    navigator.share({ text: getShareMessage() });
+    if (navigator.share) {
+      navigator.share({
+        title: "Play Wordevle",
+        text: message,
+        url: window.location.href
+       })
+    } else {
+      navigator.clipboard.writeText(message)
+      .then(() => showError("Copied to clipboard!", 3000));
+    }
   })
 }
 

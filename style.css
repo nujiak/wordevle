@@ -140,9 +140,9 @@ body {
   position: fixed;
   left: 50%;
   top: 50%;
-  min-width: 50vw;
-  min-height: 50vh;
-  transform: translate(-50%, -50%) scale(0, 0);
+  height: fit-content;
+  padding: 5%;
+  transform: translate(-50%, 150vh);
   background-color: lightgray;
   filter: drop-shadow(5vmin 5vmin 5vmin rgba(0, 0, 0, 0.3));
   border-radius: 5vmin;
@@ -153,7 +153,7 @@ body {
 #gameOverBox.shown {
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
-  transform: translate(-50%, -50%) scale(100%, 100%);
+  transform: translate(-50%, -50%);
 }
 
 #gameOverAnswer {
