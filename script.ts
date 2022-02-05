@@ -395,15 +395,21 @@ function encodeUrl(word: string, name: string, attempts: number) {
   return url + "?" + encodedParams;
 }
 
+function setNameTime(urlParams: URLSearchParams) {
+  console.log(urlParams.has("name"))
+  if(!urlParams.has("name")) {
+    return;
+  }
+  document.getElementById("wordInfo").style.display = "block";
+  const name = urlParams.get("name");
+  document.getElementById("name").innerText = name;
+  const time = new Date(parseInt(urlParams.get("time")));
+  document.getElementById("time").innerText = time.toLocaleDateString();
+}
+
 function init() {
 
   require('dotenv').config();
-
-  const loadingScreen = document.getElementById("loadingScreen");
-  loadingScreen.classList.add("hidden");
-  setTimeout(() => {
-    loadingScreen.style.display = "none";
-  }, 500);
 
   let hasCustomWord: boolean = false;
 
@@ -441,18 +447,12 @@ function init() {
   } else {
     openCustomWordForm();
   }
-}
 
-function setNameTime(urlParams: URLSearchParams) {
-  console.log(urlParams.has("name"))
-  if(!urlParams.has("name")) {
-    return;
-  }
-  document.getElementById("wordInfo").style.display = "block";
-  const name = urlParams.get("name");
-  document.getElementById("name").innerText = name;
-  const time = new Date(parseInt(urlParams.get("time")));
-  document.getElementById("time").innerText = time.toLocaleDateString();
+  const loadingScreen = document.getElementById("loadingScreen");
+  loadingScreen.classList.add("hidden");
+  setTimeout(() => {
+    loadingScreen.style.display = "none";
+  }, 500);
 }
 
 init()
