@@ -60,6 +60,26 @@ button {
   }
 }
 
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 1rem;
+  right: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0.8rem;
+  background-color: transparent;
+  box-shadow: inset 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.1),
+              inset -0.3rem -0.3rem 0.3rem rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 0.8rem;
+  box-shadow: inset -0.2rem -0.2rem 0.4rem rgba(0, 0, 0, 0.1),
+              inset 0.2rem 0.2rem 0.4rem rgba(255, 255, 255, 0.3);
+}
+
 #loadingScreen {
   top: 0;
   left: 0;
