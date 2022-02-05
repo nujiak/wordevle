@@ -32,10 +32,17 @@
 
     <div id="setUpBox">
       <h1 id="setUpTitle">Enter a word!</h1>
+
       <label for="setUpWordInput">Word</label>
       <input id="setUpWordInput" class="dialogInput" type="text">
+
+      <label for="range">Number of attempts</label>
+      <p id="attemptsIndicator"></p>
+      <input type="range" min="3" max="12" value="6" id="attemptsSlider" name="attempts">
+
       <label for="setUpNameInput">Name (optional)</label>
       <input id="setUpNameInput" class="dialogInput" type="text">
+
       <button type="submit" id="setUpShare" class="dialogButton">Share <span class="material-icons-round md-24">share</span></button>
       <button type="submit" id="setUpSubmit" class="dialogButton">Go! <span class="material-icons-round md-24">play_arrow</span></button>
     </div>

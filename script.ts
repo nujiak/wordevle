@@ -23,7 +23,7 @@ let word: string = "HELLO";
 
 const answer: string[] = word.split("");
 
-const maxAttempts: number = 6;
+let maxAttempts: number = 6;
 
 const results: Result[][] = [];
 
@@ -324,13 +324,25 @@ function openCustomWordForm() {
   // Submit on clicking button
   document.getElementById("setUpSubmit").addEventListener("click", submitSetUpOptions);
 
-  // Submit on clicking button
+  // Share on clicking button
   document.getElementById("setUpShare").addEventListener("click", shareSetUpOptions);
+
+  const attemptsIndicator = document.getElementById("attemptsIndicator");
+
+  const attemptsSlider = <HTMLInputElement> document.getElementById("attemptsSlider");
+
+  // Set initial value
+  attemptsIndicator.innerText = attemptsSlider.value;
+
+  attemptsSlider.addEventListener("input", () => {
+    attemptsIndicator.innerText = attemptsSlider.value;
+  });
 }
 
 function submitSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
   const customNameField = <HTMLInputElement> document.getElementById("setUpNameInput")
+  const maxAttemptsSlider = <HTMLInputElement> document.getElementById("attemptsSlider")
 
   if (!isWordValid(customWordField.value.trim())) {
     showError("Invalid word", 3000);
@@ -344,12 +356,14 @@ function submitSetUpOptions() {
 
   const word = customWordField.value.trim();
   const name = customNameField.value.trim();
-  window.location.assign(encodeUrl(word, name));
+  const attempts = parseInt(maxAttemptsSlider.value);
+  window.location.assign(encodeUrl(word, name, attempts));
 }
 
 function shareSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
   const customNameField = <HTMLInputElement> document.getElementById("setUpNameInput")
+  const maxAttemptsSlider = <HTMLInputElement> document.getElementById("attemptsSlider")
   const name = customNameField.value.trim();
 
   if (!isWordValid(customWordField.value.trim())) {
@@ -361,16 +375,18 @@ function shareSetUpOptions() {
     showError("Name is too long", 3000);
     return;
   }
-  
-  const word = customWordField.value.trim()
-  share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word, name)}`)
+
+  const word = customWordField.value.trim();
+  const attempts = parseInt(maxAttemptsSlider.value);
+  share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word, name, attempts)}`)
 }
 
-function encodeUrl(word: string, name: string) {
+function encodeUrl(word: string, name: string, attempts: number) {
   const url = new URL(window.location.origin);
 
   const searchParams = new URLSearchParams();
   searchParams.append("word", word);
+  searchParams.append("attempts", attempts.toString());
   if (/[a-zA-Z\d]/.test(name)) {
     searchParams.append("name", name.trim());
     searchParams.append("time", (new Date()).getTime().toString())
@@ -400,6 +416,12 @@ function init() {
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
       hasCustomWord = true;
+      maxAttempts = parseInt(urlParams.get("attempts"));
+      if (maxAttempts > 12) {
+        maxAttempts = 12;
+      } else if (maxAttempts < 3) {
+        maxAttempts = 3;
+      }
       setNameTime(urlParams);
     }
   }
