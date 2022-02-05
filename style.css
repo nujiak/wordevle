@@ -142,7 +142,7 @@ button {
   text-align: center;
 }
 
-#setUpWordInput {
+.dialogInput {
   flex-basis: 100%;
   padding: 0.2rem;
   width: 50vw;
@@ -154,6 +154,7 @@ button {
   font-family: 'Signika', sans-serif;
   font-size: xx-large;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 #gameOverBox {

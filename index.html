@@ -32,7 +32,10 @@
 
     <div id="setUpBox">
       <h1 id="setUpTitle">Enter a word!</h1>
-      <input id="setUpWordInput" type="text">
+      <label for="setUpWordInput">Word</label>
+      <input id="setUpWordInput" class="dialogInput" type="text">
+      <label for="setUpNameInput">Name (optional)</label>
+      <input id="setUpNameInput" class="dialogInput" type="text">
       <button type="submit" id="setUpShare" class="dialogButton">Share <span class="material-icons-round md-24">share</span></button>
       <button type="submit" id="setUpSubmit" class="dialogButton">Go! <span class="material-icons-round md-24">play_arrow</span></button>
     </div>
@@ -51,7 +54,9 @@
       <button type="button" id="create" class="dialogButton">Create <span class="material-icons-round md-24">add</span></button>
     </div>
 
-    <div id="resultPanel"></div>
+    <div id="resultPanel">
+      <p id="wordInfo">This word was suggested by <i><b><span id="name"></span></u></b> on <i><span id="time"></span></i></p>
+    </div>
 
     <div id="keyboard">
       <div class="keyboardRow">

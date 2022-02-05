@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { encode } from "punycode";
 import { decrypt, encrypt } from "./security/AesCbc";
 import { isWordInWordBank } from "./words/WordBank";
@@ -329,31 +330,51 @@ function openCustomWordForm() {
 
 function submitSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
+  const customNameField = <HTMLInputElement> document.getElementById("setUpNameInput")
 
-  if (isWordValid(customWordField.value.trim())) {
-    const word = customWordField.value.trim()
-    window.location.assign(encodeUrl(word));
-  } else {
+  if (!isWordValid(customWordField.value.trim())) {
     showError("Invalid word", 3000);
+    return;
   }
+
+  if (customNameField.value.trim().length > 32) {
+    showError("Name is too long", 3000);
+    return;
+  }
+
+  const word = customWordField.value.trim();
+  const name = customNameField.value.trim();
+  window.location.assign(encodeUrl(word, name));
 }
 
 function shareSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
+  const customNameField = <HTMLInputElement> document.getElementById("setUpNameInput")
+  const name = customNameField.value.trim();
 
-  if (isWordValid(customWordField.value.trim())) {
-    const word = customWordField.value.trim()
-    share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word)}`)
-  } else {
+  if (!isWordValid(customWordField.value.trim())) {
     showError("Invalid word", 3000);
+    return;
   }
+
+  if (customNameField.value.trim().length > 32) {
+    showError("Name is too long", 3000);
+    return;
+  }
+  
+  const word = customWordField.value.trim()
+  share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word, name)}`)
 }
 
-function encodeUrl(word: string) {
+function encodeUrl(word: string, name: string) {
   const url = new URL(window.location.origin);
 
   const searchParams = new URLSearchParams();
   searchParams.append("word", word);
+  if (/[a-zA-Z\d]/.test(name)) {
+    searchParams.append("name", name.trim());
+    searchParams.append("time", (new Date()).getTime().toString())
+  }
   const encodedParams = encrypt(searchParams.toString());
   return url + "?" + encodedParams;
 }
@@ -379,6 +400,7 @@ function init() {
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
       hasCustomWord = true;
+      setNameTime(urlParams);
     }
   }
 
@@ -397,6 +419,18 @@ function init() {
   } else {
     openCustomWordForm();
   }
+}
+
+function setNameTime(urlParams: URLSearchParams) {
+  console.log(urlParams.has("name"))
+  if(!urlParams.has("name")) {
+    document.getElementById("wordInfo").style.display = "none";
+    return;
+  }
+  const name = urlParams.get("name");
+  document.getElementById("name").innerText = name;
+  const time = new Date(parseInt(urlParams.get("time")));
+  document.getElementById("time").innerText = time.toLocaleDateString();
 }
 
 init()
