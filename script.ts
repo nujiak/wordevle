@@ -153,7 +153,7 @@ function showGameOver() {
 
   document.getElementById("gameOverAnswer").innerText = word.toLowerCase();
 
-  const message = getShareMessage();
+  const message = getShareMessage(isLost);
 
   document.getElementById("share").addEventListener("click", () => {
     if (navigator.share) {
@@ -168,8 +168,8 @@ function showGameOver() {
   })
 }
 
-function getShareMessage(): string {
-  let message = `Wordevle ${results.length}/${maxAttempts}\n`;
+function getShareMessage(isLost: boolean): string {
+  let message = 'Wordevle'  +`${results.length}/${maxAttempts}\n`;
   console.log(results);
 
   for (let i = 0; i < results.length; i++) {
@@ -187,7 +187,7 @@ function getShareMessage(): string {
     message += "\n";
   }
 
-  message += `\nChallenge my score at ${window.location.href}`
+  message += `\nChallenge my score at: \n ${window.location.href}`
 
   return message;
 }

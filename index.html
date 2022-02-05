@@ -11,6 +11,9 @@
     <script src="bundle.js" defer="true"></script>
     <link rel="stylesheet" href="style.css">
 
+    <!-- Material icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round" rel="stylesheet">
+
     <div id="header">
       <h1 id="title">Wordevle</h1>
       <p id="tagline">Whatever word you want!</p>
@@ -28,7 +31,7 @@
     <div id="setUpBox">
       <h1 id="setUpTitle">Enter a word!</h1>
       <input id="setUpWordInput" type="text">
-      <button type="submit" id="setUpSubmit">Go!</button>
+      <button type="submit" id="setUpSubmit">Go! <span class="material-icons-round md-36">play_arrow</span></button>
     </div>
 
     <div id="gameOverBox">
@@ -38,7 +41,7 @@
         <span id="gameOverReveal">The word was </span>
         <span id="gameOverAnswer"></span>
       </p>
-      <button type="button" id="share">Share</button>
+      <button type="button" id="share">Share <span class="material-icons md-24">share</span></button>
     </div>
 
     <div id="resultPanel"></div>

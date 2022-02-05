@@ -13,6 +13,37 @@ body {
   font-family: 'Signika', sans-serif;
 }
 
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: lightgrey;
+  font-family: 'Signika', sans-serif;
+}
+
+.material-icons {
+  margin: -4px;
+  padding-left: 1vw;
+}
+
+.material-icons-round {
+  margin: -4px;
+  padding-left: 1vw;
+}
+
+/* Rules for sizing material icons. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons-round.md-18 { font-size: 18px; }
+.material-icons-round.md-24 { font-size: 24px; }
+.material-icons-round.md-36 { font-size: 36px; }
+.material-icons-round.md-48 { font-size: 48px; }
+
 @keyframes loading {
   0% {
     transform: scale(100%, 100%);
@@ -161,13 +192,15 @@ body {
 }
 
 #share {
+  display: flex;
+  align-items: center;
   background-color: lightgray;
   border: none;
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 0;
   font-family: 'Signika', sans-serif;
-  font-size: large;
+  font-size: x-large;
   border-radius: 2vmin;
   padding: 2vh 2vw;
   box-shadow: 1vmin 1vmin 1.5vmin rgba(0, 0, 0, 0.1),
@@ -304,9 +337,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   border: none;
   border-radius: 1vh;
   margin: 0 0.5vh;
-  align-items: stretch;
   padding: 0;
-  background-color: lightgrey;
   box-shadow: 0.2vh 0.2vh 0.3rem rgba(0, 0, 0, 0.2),
               -0.2vh -0.2vh 0.3rem rgba(255, 255, 255, 0.4),
               inset 0 0 0 rgba(0, 0, 0, 0.1),
