@@ -19,6 +19,11 @@ class ResultBox {
   }
 }
 
+const WORD_PARAM_KEY = "w";
+const ATTEMPTS_PARAM_KEY = "a";
+const NAME_PARAM_KEY = "n";
+const TIME_PARAM_KEY = "t";
+
 let word: string = "HELLO";
 
 const answer: string[] = word.split("");
@@ -396,25 +401,24 @@ function encodeUrl(word: string, name: string, attempts: number) {
   const url = new URL(window.location.origin);
 
   const searchParams = new URLSearchParams();
-  searchParams.append("word", word);
-  searchParams.append("attempts", attempts.toString());
+  searchParams.append(WORD_PARAM_KEY, word);
+  searchParams.append(ATTEMPTS_PARAM_KEY, attempts.toString());
   if (/[a-zA-Z\d]/.test(name)) {
-    searchParams.append("name", name.trim());
-    searchParams.append("time", (new Date()).getTime().toString())
+    searchParams.append(NAME_PARAM_KEY, name.trim());
+    searchParams.append(TIME_PARAM_KEY, (new Date()).getTime().toString())
   }
   const encodedParams = encrypt(searchParams.toString());
   return url + "?" + encodedParams;
 }
 
 function setNameTime(urlParams: URLSearchParams) {
-  console.log(urlParams.has("name"))
-  if(!urlParams.has("name")) {
+  if(!urlParams.has(NAME_PARAM_KEY)) {
     return;
   }
   document.getElementById("wordInfo").style.display = "block";
-  const name = urlParams.get("name");
+  const name = urlParams.get(NAME_PARAM_KEY);
   document.getElementById("name").innerText = name;
-  const time = new Date(parseInt(urlParams.get("time")));
+  const time = new Date(parseInt(urlParams.get(TIME_PARAM_KEY)));
   document.getElementById("time").innerText = time.toLocaleDateString();
 }
 
@@ -428,12 +432,12 @@ function init() {
   const encryptedParams = query.slice(1)
   const urlParams = new URLSearchParams(decrypt(encryptedParams));
 
-  if (urlParams.has("word")) {
-    const customWord:string = urlParams.get("word");
+  if (urlParams.has(WORD_PARAM_KEY)) {
+    const customWord:string = urlParams.get(WORD_PARAM_KEY);
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
       hasCustomWord = true;
-      maxAttempts = parseInt(urlParams.get("attempts"));
+      maxAttempts = parseInt(urlParams.get(ATTEMPTS_PARAM_KEY));
       if (maxAttempts > 12) {
         maxAttempts = 12;
       } else if (maxAttempts < 3) {
