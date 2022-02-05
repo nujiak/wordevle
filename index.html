@@ -32,7 +32,7 @@
     </div>
 
     <div id="setUpBox">
-      <h1 id="setUpTitle">Enter a word!</h1>
+      <h1 id="setUpTitle">✍️ Enter a word!</h1>
 
       <label for="setUpWordInput">Word</label>
       <input id="setUpWordInput" class="dialogInput" type="text">
@@ -50,13 +50,18 @@
 
     <div id="gameOverBox">
       <h1 class="gameOverText">
-        <span class="win">Well done!</span>
-        <span class="lose">Good try</span>
+        <span class="win">🤩 Well done!</span>
+        <span class="lose">😔 Good try...</span>
       </h1>
       <p class="gameOverText gameOverParagraph">
         <span id="gameOverCongratulate" class="win">You guessed </span>
         <span id="gameOverReveal" class="lose">The word was </span>
         <span id="gameOverAnswer"></span>
+        <span class="win">in</span>
+        <span id="gameOverAttemptsMade" class="win"></span>
+        <span class="win">out of</span>
+        <span id="gameOverMaxAttempts" class="win"></span>
+        <span class="win">tries</span>
       </p>
       <button type="button" id="share" class="dialogButton">Share <span class="material-icons md-24">share</span></button>
       <button type="button" id="create" class="dialogButton">Create <span class="material-icons-round md-24">add</span></button>

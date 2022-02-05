@@ -163,6 +163,10 @@ function showGameOver() {
 
   document.getElementById("gameOverAnswer").innerText = word.toLowerCase();
 
+  document.getElementById("gameOverAttemptsMade").innerText = results.length.toString();
+
+  document.getElementById("gameOverMaxAttempts").innerText = maxAttempts.toString();
+
   const message = getShareMessage(isLost);
 
   document.getElementById("share").addEventListener("click", () => {
@@ -188,7 +192,7 @@ function share(title: string, text: string) {
 }
 
 function getShareMessage(isLost: boolean): string {
-  let message = 'Wordevle'  +`${results.length}/${maxAttempts}\n`;
+  let message = 'Wordevle ' +`${results.length}/${maxAttempts} ` + (isLost ? "❌" : "✅") +"\n";
   console.log(results);
 
   for (let i = 0; i < results.length; i++) {
@@ -206,7 +210,7 @@ function getShareMessage(isLost: boolean): string {
     message += "\n";
   }
 
-  message += `\nChallenge my score at: \n ${window.location.href}`
+  message += `\nChallenge my score on Wordevle:\n\n${window.location.href}`
 
   return message;
 }
@@ -378,7 +382,14 @@ function shareSetUpOptions() {
 
   const word = customWordField.value.trim();
   const attempts = parseInt(maxAttemptsSlider.value);
-  share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word, name, attempts)}`)
+
+  let message = "";
+  for (let i = 0; i < word.length; i++) {
+    message += "⬜";
+  }
+  message += `\n\nTry to guess this ${word.length}-letter word on Wordevle in ${attempts} tries or less:\n\n${encodeUrl(word, name, attempts)}`;
+
+  share("Play Wordevle!", message)
 }
 
 function encodeUrl(word: string, name: string, attempts: number) {
