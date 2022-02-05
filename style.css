@@ -215,10 +215,10 @@ button {
   font-style: italic;
 }
 
-#share {
+.gameOverIcon {
+  transition-duration: 50ms;
   display: flex;
   align-items: center;
-  flex-basis: 100%;
   background-color: lightgray;
   border: none;
   margin: auto;
@@ -234,16 +234,14 @@ button {
               inset -0 -0 0 rgba(255, 255, 255, 0.2);
 }
 
-#share:hover {
-transition-duration: 100ms;
+.gameOverIcon:hover {
 box-shadow: 0.5vmin 0.5vmin 1.0vmin rgba(0, 0, 0, 0.2),
             -0.5vmin -0.5vmin 1.0vmin rgba(255, 255, 255, 0.4),
             inset 0 0 0 rgba(0, 0, 0, 0.1),
             inset -0 -0 0 rgba(255, 255, 255, 0.2);
 }
 
-#share:active {
-transition-duration: 100ms;
+.gameOverIcon:active {
 box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
             -0 -0 0 rgba(255, 255, 255, 0.4),
             inset 1vmin 1vmin 1vmin rgba(0, 0, 0, 0.1),

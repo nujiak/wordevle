@@ -174,6 +174,10 @@ function showGameOver() {
       .then(() => showError("Copied to clipboard!", 3000));
     }
   })
+
+  document.getElementById("create").addEventListener("click", () => {
+    window.location.assign(window.location.origin);
+  })
 }
 
 function getShareMessage(isLost: boolean): string {
