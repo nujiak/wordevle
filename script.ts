@@ -446,9 +446,9 @@ function init() {
 function setNameTime(urlParams: URLSearchParams) {
   console.log(urlParams.has("name"))
   if(!urlParams.has("name")) {
-    document.getElementById("wordInfo").style.display = "none";
     return;
   }
+  document.getElementById("wordInfo").style.display = "block";
   const name = urlParams.get("name");
   document.getElementById("name").innerText = name;
   const time = new Date(parseInt(urlParams.get("time")));

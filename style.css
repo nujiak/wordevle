@@ -80,6 +80,10 @@ button {
               inset 0.2rem 0.2rem 0.4rem rgba(255, 255, 255, 0.3);
 }
 
+p {
+  text-align: center;
+}
+
 #loadingScreen {
   top: 0;
   left: 0;
@@ -112,6 +116,8 @@ button {
 #loadingDescription {
   font-size: 5vmin;
   font-weight: 400;
+  text-align: center;
+  padding: 0 10%;
 }
 
 #setUpBox {
@@ -146,6 +152,7 @@ button {
   margin-top: 1rem;
   -webkit-appearance: none;
   flex-basis: 100%;
+  margin: 0 5rem;
   margin-bottom: 2rem;
   height: 1rem;
   border-radius: 0.5rem;
@@ -213,6 +220,10 @@ button {
 #gameOverAnswer {
   flex-basis: 100%;
   font-style: italic;
+}
+
+.gameOverParagraph {
+  font-size: x-large;
 }
 
 .dialogButton {
@@ -301,6 +312,10 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   font-size: 2vh;
 }
 
+#wordInfo {
+  display: none;
+}
+
 #resultPanel {
   display: flex;
   height: 60vh;
@@ -316,6 +331,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 .resultBox {
+  transition: background-color 0.1s ease-out;
   box-sizing: border-box;
   display: flex;
   margin: 0.5vmin;
@@ -356,6 +372,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 .keyboardKey {
+  transition: background-color 0.1s ease-out;
   transition-duration: 0.1s;
   border: none;
   border-radius: 1vh;
