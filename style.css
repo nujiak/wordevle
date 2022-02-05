@@ -176,7 +176,7 @@ button {
   padding: 5%;
   transform: translate(-50%, 150vh);
   background-color: lightgray;
-  filter: drop-shadow(5vmin 5vmin 5vmin rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0 30vmax black);
   border-radius: 5vmin;
   justify-content: center;
   flex-direction: column;
