@@ -110,6 +110,7 @@ p {
   flex-basis: 100%;
   font-size: 20vmin;
   margin-top: 20vh;
+  font-weight: 500;
   animation: 5s ease-in-out 0s infinite normal none running loading;
 }
 
@@ -300,7 +301,9 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   margin: 1vh 0 0 0;
   user-select: none;
   cursor: pointer;
+  font-weight: 500;
   font-size: 5vh;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 #tagline {
