@@ -190,8 +190,11 @@ button {
   display: flex;
   flex-wrap: wrap;
   position: fixed;
+  overflow-y: auto;
   left: 50%;
   top: 50%;
+  max-width: 90%;
+  max-height: 90%;
   height: fit-content;
   padding: 5%;
   transform: translate(-50%, 150vh);
@@ -199,7 +202,6 @@ button {
   filter: drop-shadow(0 0 30vmax black);
   border-radius: 5vmin;
   justify-content: center;
-  flex-direction: column;
 }
 
 #gameOverBox.shown {
@@ -209,12 +211,14 @@ button {
 }
 
 #gameOverAnswer {
+  flex-basis: 100%;
   font-style: italic;
 }
 
 #share {
   display: flex;
   align-items: center;
+  flex-basis: 100%;
   background-color: lightgray;
   border: none;
   margin: auto;
@@ -275,7 +279,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 
 #header {
   display: flex;
-  height: 10%;
+  height: 10vh;
   flex-wrap: wrap;
   user-select: none;
 }
@@ -287,6 +291,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   margin: 1vh 0 0 0;
   user-select: none;
   cursor: pointer;
+  font-size: 5vh;
 }
 
 #tagline {
@@ -295,28 +300,27 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   font-size: small;
   margin: -1vh 0 0 0;
   cursor: pointer;
+  font-size: 2vh;
 }
 
 #resultPanel {
   display: flex;
   height: 60vh;
-  flex-wrap: wrap;
-  align-self: flex-start;
-  justify-content: center;
   align-items: center;
   width: 100%;
   overflow: auto;
+  flex-direction: column;
 }
 
 .resultRow {
   display: flex;
-  flex: 1 0 100%;
   justify-content: center;
 }
 
 .resultBox {
+  box-sizing: border-box;
   display: flex;
-  margin: 1vh;
+  margin: 0.5vmin;
   padding: 0rem;
   height: 10vmin;
   width: 10vmin;
@@ -332,7 +336,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   color: rgba(0, 0, 0, 0.87);
   font-family: 'Exo', sans-serif;
   user-select: none;
-  font-size: 4vh;
+  font-size: 3vh;
 }
 
 #keyboard {
