@@ -139,6 +139,7 @@ p {
 }
 
 #setUpTitle {
+  color: rgba(0, 0, 0, 0.87);
   flex-basis: 100%;
   text-align: center;
 }
@@ -201,7 +202,7 @@ p {
   padding: 5%;
   transform: translate(-50%, 150vh);
   background-color: lightgray;
-  filter: drop-shadow(0 0 30vmax black);
+  box-shadow: 0 0 15vmax rgba(0, 0, 0, 0.4);
   border-radius: 5vmin;
   justify-content: center;
 }
@@ -255,6 +256,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 .gameOverText {
+  color: rgba(0, 0, 0, 0.87);
   flex-basis: 100%;
   text-align: center;
 }
