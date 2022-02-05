@@ -380,9 +380,8 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
               inset 0 0 0 rgba(0, 0, 0, 0.1),
               inset 0 0 0 rgba(255, 255, 255, 0.2);
   font-family: 'Signika', sans-serif;
-  font-size: 3vh;
-  font-weight: 400;
-  color: rbga(0, 0, 0, 0.1);
+  font-size: 3.5vh;
+  font-weight: 500;
   user-select: none;
   cursor:pointer;
   touch-action: manipulation;
