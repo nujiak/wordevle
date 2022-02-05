@@ -1,3 +1,4 @@
+import { encode } from "punycode";
 import { decrypt, encrypt } from "./security/AesCbc";
 import { isWordInWordBank } from "./words/WordBank";
 
@@ -164,20 +165,25 @@ function showGameOver() {
   const message = getShareMessage(isLost);
 
   document.getElementById("share").addEventListener("click", () => {
-    if (navigator.share) {
-      navigator.share({
-        title: "Play Wordevle",
-        text: message
-       })
-    } else {
-      navigator.clipboard.writeText(message)
-      .then(() => showError("Copied to clipboard!", 3000));
-    }
+      share("Play Wordevle", message);
   })
 
   document.getElementById("create").addEventListener("click", () => {
     window.location.assign(window.location.origin);
   })
+}
+
+function share(title: string, text: string) {
+
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: text
+     })
+  } else {
+    navigator.clipboard.writeText(text)
+    .then(() => showError("Copied to clipboard!", 3000));
+  }
 }
 
 function getShareMessage(isLost: boolean): string {
@@ -317,28 +323,39 @@ function openCustomWordForm() {
   // Submit on clicking button
   document.getElementById("setUpSubmit").addEventListener("click", submitSetUpOptions);
 
-  // Submit on pressing enter on keyboard
-  document.addEventListener("keyup", (e) => {
-    console.log(e.key);
-    if (e.key === "Enter") {
-      submitSetUpOptions();
-    }
-  });
+  // Submit on clicking button
+  document.getElementById("setUpShare").addEventListener("click", shareSetUpOptions);
 }
 
 function submitSetUpOptions() {
   const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
 
   if (isWordValid(customWordField.value.trim())) {
-    const url = new URL(window.location.origin);
-
-    const searchParams = new URLSearchParams();
-    searchParams.append("word", customWordField.value.trim());
-    const encodedParams = encrypt(searchParams.toString());
-    window.location.assign(url + "?" + encodedParams);
+    const word = customWordField.value.trim()
+    window.location.assign(encodeUrl(word));
   } else {
     showError("Invalid word", 3000);
   }
+}
+
+function shareSetUpOptions() {
+  const customWordField = <HTMLInputElement> document.getElementById("setUpWordInput")
+
+  if (isWordValid(customWordField.value.trim())) {
+    const word = customWordField.value.trim()
+    share("Play Wordevle!", `Try to guess this ${word.length}-letter word on Wordevle at\n${encodeUrl(word)}`)
+  } else {
+    showError("Invalid word", 3000);
+  }
+}
+
+function encodeUrl(word: string) {
+  const url = new URL(window.location.origin);
+
+  const searchParams = new URLSearchParams();
+  searchParams.append("word", word);
+  const encodedParams = encrypt(searchParams.toString());
+  return url + "?" + encodedParams;
 }
 
 function init() {

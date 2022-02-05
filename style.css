@@ -119,8 +119,9 @@ button {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 90%;
-  height: 60%;
+  padding: 5%;
+  max-width: 90%;
+  max-height: 60%;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -155,37 +156,6 @@ button {
   text-align: center;
 }
 
-#setUpSubmit {
-  transition-duration: 300ms;
-  padding: 3vmin 6vmin;
-  background-color: lightgray;
-  border: none;
-  border-radius: 0.5vmin;
-  box-shadow: 1vmin 1vmin 1.5vmin rgba(0, 0, 0, 0.1),
-              -1vmin -1vmin 1.5vmin rgba(255, 255, 255, 0.2),
-              inset 0 0 0 rgba(0, 0, 0, 0.1),
-              inset -0 -0 0 rgba(255, 255, 255, 0.2);
-  color: rgba(0, 0, 0, 0.5);
-  font-family: 'Signika', sans-serif;
-  font-size: x-large;
-}
-
-#setUpSubmit:hover {
-  transition-duration: 300ms;
-  box-shadow: 0.5vmin 0.5vmin 1.0vmin rgba(0, 0, 0, 0.2),
-              -0.5vmin -0.5vmin 1.0vmin rgba(255, 255, 255, 0.4),
-              inset 0 0 0 rgba(0, 0, 0, 0.1),
-              inset -0 -0 0 rgba(255, 255, 255, 0.2);
-}
-
-#setUpSubmit:active {
-  transition-duration: 100ms;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
-              -0 -0 0 rgba(255, 255, 255, 0.4),
-              inset 1vmin 1vmin 1vmin rgba(0, 0, 0, 0.1),
-              inset -1vmin -1vmin 1vmin rgba(255, 255, 255, 0.2);
-}
-
 #gameOverBox {
   display: flex;
   flex-wrap: wrap;
@@ -215,7 +185,7 @@ button {
   font-style: italic;
 }
 
-.gameOverIcon {
+.dialogButton {
   transition-duration: 50ms;
   display: flex;
   align-items: center;
@@ -227,21 +197,21 @@ button {
   font-family: 'Signika', sans-serif;
   font-size: x-large;
   border-radius: 2vmin;
-  padding: 2vh 2vw;
+  padding: 3vmin;
   box-shadow: 1vmin 1vmin 1.5vmin rgba(0, 0, 0, 0.1),
               -1vmin -1vmin 1.5vmin rgba(255, 255, 255, 0.2),
               inset 0 0 0 rgba(0, 0, 0, 0.1),
               inset -0 -0 0 rgba(255, 255, 255, 0.2);
 }
 
-.gameOverIcon:hover {
+.dialogButton:hover {
 box-shadow: 0.5vmin 0.5vmin 1.0vmin rgba(0, 0, 0, 0.2),
             -0.5vmin -0.5vmin 1.0vmin rgba(255, 255, 255, 0.4),
             inset 0 0 0 rgba(0, 0, 0, 0.1),
             inset -0 -0 0 rgba(255, 255, 255, 0.2);
 }
 
-.gameOverIcon:active {
+.dialogButton:active {
 box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
             -0 -0 0 rgba(255, 255, 255, 0.4),
             inset 1vmin 1vmin 1vmin rgba(0, 0, 0, 0.1),
