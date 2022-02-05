@@ -142,6 +142,7 @@ p {
   color: rgba(0, 0, 0, 0.87);
   flex-basis: 100%;
   text-align: center;
+  font-weight: 500;
 }
 
 #attemptsSlider {
@@ -261,6 +262,7 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   color: rgba(0, 0, 0, 0.87);
   flex-basis: 100%;
   text-align: center;
+  font-weight: 500;
 }
 
 #errorBox {
