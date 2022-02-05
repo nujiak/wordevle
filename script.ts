@@ -145,10 +145,18 @@ function showGameOver() {
   const gameOverBox = document.getElementById("gameOverBox");
   gameOverBox.classList.add("shown");
 
-  if (isLost) {
-    document.getElementById("gameOverCongratulate").style.display = "none";
-  } else {
-    document.getElementById("gameOverReveal").style.display = "none";
+  // Hide the win/lose elements
+  const elements = isLost
+  ? document.getElementsByClassName("win")
+  : document.getElementsByClassName("lose");
+
+  console.log(elements);
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = <HTMLElement> elements[i];
+    if (element) {
+      element.style.display = "none";
+    }
   }
 
   document.getElementById("gameOverAnswer").innerText = word.toLowerCase();
