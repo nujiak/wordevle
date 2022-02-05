@@ -159,8 +159,7 @@ function showGameOver() {
     if (navigator.share) {
       navigator.share({
         title: "Play Wordevle",
-        text: message,
-        url: window.location.href
+        text: message
        })
     } else {
       navigator.clipboard.writeText(message)
