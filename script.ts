@@ -473,6 +473,8 @@ function setUpWord(): boolean {
         maxAttempts = 7;
         break;
     }
+    document.getElementById("wordOfTheDayText").style.display = "block"
+    document.getElementById("date").innerText = new Date().toLocaleDateString();
     return true;
   }
 

@@ -334,6 +334,10 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   display: none;
 }
 
+#wordOfTheDayText {
+  display: none;
+}
+
 #resultPanel {
   display: flex;
   height: 60vh;
