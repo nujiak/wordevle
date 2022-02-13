@@ -312,7 +312,9 @@ function inputCharacter(c: string) {
 
   currentEntry.push(c.toUpperCase());
 
-  resultBoxes[results.length][currentEntry.length - 1].label.innerText = c.toUpperCase()
+  const resultBox = resultBoxes[results.length][currentEntry.length - 1]
+  resultBox.label.innerText = c.toUpperCase()
+  resultBox.box.scrollIntoView({behavior: "smooth", block: "end"});
 }
 
 function setUpKeyboardInput() {
