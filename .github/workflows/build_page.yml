@@ -31,11 +31,14 @@ jobs:
           npm run browserify
         env:
           QUERY_ENCRYPTION_KEY: ${{ secrets.QUERY_ENCRYPTION_KEY }}
-      - name: Move files
+      - name: Minify files
         run: |
-          shopt -s extglob
           mkdir build
-          cp -r !(build) build
+          cp *.png ./build
+          npm install -g minify
+          minify bundle.js > build/bundle.js
+          minify index.html > build/index.html
+          minify style.css > build/style.css
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
