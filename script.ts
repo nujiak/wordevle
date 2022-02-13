@@ -132,8 +132,6 @@ function submitEntry() {
   });
 
   results.push(result);
-  console.log(result);
-  console.log(results);
 
   if (results.length == maxAttempts) {
     isGameCompleted = true;
@@ -158,8 +156,6 @@ function showGameOver() {
   const elements = isLost
   ? document.getElementsByClassName("win")
   : document.getElementsByClassName("lose");
-
-  console.log(elements);
 
   for (let i = 0; i < elements.length; i++) {
     const element = <HTMLElement> elements[i];
@@ -230,14 +226,11 @@ function share(title: string, text: string) {
 
 function getShareMessage(isLost: boolean): string {
   let message = 'Wordevle ' +`${results.length}/${maxAttempts} ` + (isLost ? "❌" : "✅") +"\n";
-  console.log(results);
 
   for (let i = 0; i < results.length; i++) {
     const row = results[i];
-    console.log(row);
     for (let j = 0; j < row.length; j++) {
       const result = row[j];
-      console.log(result);
       message += (result === Result.CORRECT
         ? "🟩"
         : result === Result.MISPLACED
