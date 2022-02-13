@@ -1,7 +1,7 @@
 import { url } from "inspector";
 import { encode } from "punycode";
 import { decrypt, encrypt } from "./security/AesCbc";
-import { isWordInWordBank } from "./words/WordBank";
+import { getWordOfTheDay, isWordInWordBank } from "./words/WordBank";
 
 enum Result {
   CORRECT = "correct",
@@ -39,6 +39,8 @@ const keyboardKeys: HTMLButtonElement[] = [];
 const currentEntry: string[] = [];
 
 let isGameCompleted: boolean = false;
+
+const isWordOfTheDay: boolean = window.location.search === "";
 
 function isValidEntry(entry: string): boolean {
   return entry.length == word.length
@@ -179,8 +181,38 @@ function showGameOver() {
   })
 
   document.getElementById("create").addEventListener("click", () => {
-    window.location.assign(window.location.origin);
+    openCustomWordForm();
   })
+
+  const dailyTimer = document.getElementById("dailyTimer");
+
+  const nextDay = new Date();
+  nextDay.setHours(24, 0, 0, 0);
+  const nextDayMs = nextDay.valueOf();
+
+  // Set up timer for next word
+  if (isWordOfTheDay) {
+    updateClock();
+    setTimeout(() => {
+      updateClock();
+      setInterval(() => {
+        updateClock();
+      }, 1000);
+    }, 1000 - new Date().getMilliseconds());
+
+    function updateClock() {
+      const diff = nextDayMs - (new Date()).valueOf();
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor(diff / 1000 / 60 % 60);
+      const seconds = Math.floor(diff / 1000 % 60);
+      dailyTimer.innerText = `${hours.toString().padStart(2, "0")}`
+          + `:${minutes.toString().padStart(2, "0")}`
+          + `:${seconds.toString().padStart(2, "0")}`;
+    }
+  } else {
+    dailyTimer.style.display = "none";
+    document.getElementById("dailyTimerHeader").style.display = "none";
+  }
 }
 
 function share(title: string, text: string) {
@@ -331,10 +363,12 @@ function openCustomWordForm() {
   document.getElementById("setUpBox").classList.add("shown");
 
   // Submit on clicking button
-  document.getElementById("setUpSubmit").addEventListener("click", submitSetUpOptions);
+  document.getElementById("setUpSubmit").onclick = submitSetUpOptions;
 
   // Share on clicking button
-  document.getElementById("setUpShare").addEventListener("click", shareSetUpOptions);
+  document.getElementById("setUpShare").onclick = shareSetUpOptions;
+
+  document.getElementById("closeCreateBox").onclick = closeCustomWordForm;
 
   const attemptsIndicator = document.getElementById("attemptsIndicator");
 
@@ -346,6 +380,10 @@ function openCustomWordForm() {
   attemptsSlider.addEventListener("input", () => {
     attemptsIndicator.innerText = attemptsSlider.value;
   });
+}
+
+function closeCustomWordForm() {
+  document.getElementById("setUpBox").classList.remove("shown");
 }
 
 function submitSetUpOptions() {
@@ -422,21 +460,31 @@ function setNameTime(urlParams: URLSearchParams) {
   document.getElementById("time").innerText = time.toLocaleDateString();
 }
 
-function init() {
-
-  require('dotenv').config();
-
-  let hasCustomWord: boolean = false;
-
+function setUpWord(): boolean {
   const query = window.location.search;
   const encryptedParams = query.slice(1)
   const urlParams = new URLSearchParams(decrypt(encryptedParams));
+
+  if (query === "") {
+    word = getWordOfTheDay().toUpperCase();
+    switch (word.length) {
+      case 4:
+        maxAttempts = 8;
+        break;
+      case 5:
+        maxAttempts = 6;
+        break;
+      default:
+        maxAttempts = 7;
+        break;
+    }
+    return true;
+  }
 
   if (urlParams.has(WORD_PARAM_KEY)) {
     const customWord:string = urlParams.get(WORD_PARAM_KEY);
     if (isWordValid(customWord)) {
       word = customWord.toUpperCase();
-      hasCustomWord = true;
       maxAttempts = parseInt(urlParams.get(ATTEMPTS_PARAM_KEY));
       if (maxAttempts > 12) {
         maxAttempts = 12;
@@ -444,7 +492,20 @@ function init() {
         maxAttempts = 3;
       }
       setNameTime(urlParams);
+      return true;
     }
+  }
+
+  return false;
+}
+
+function init() {
+
+  require('dotenv').config();
+
+  if (!setUpWord()) {
+    window.location.replace(window.location.origin);
+    return;
   }
 
   document.getElementById("title").addEventListener("click", () => {
@@ -455,13 +516,9 @@ function init() {
     window.location.assign(window.location.origin);
   });
 
-  if (hasCustomWord) {
-    setupResultPanel();
-    setUpKeyboardInput();
-    setUpVirtualKeyboard();
-  } else {
-    openCustomWordForm();
-  }
+  setupResultPanel();
+  setUpKeyboardInput();
+  setUpVirtualKeyboard();
 
   const loadingScreen = document.getElementById("loadingScreen");
   loadingScreen.classList.add("hidden");
