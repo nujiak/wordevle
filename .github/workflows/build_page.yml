@@ -35,6 +35,7 @@ jobs:
         run: |
           mkdir build
           cp *.png ./build
+          cp CNAME ./build
           npm install -g minify
           minify bundle.js > build/bundle.js
           minify index.html > build/index.html
