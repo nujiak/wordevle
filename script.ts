@@ -426,7 +426,13 @@ function shareSetUpOptions() {
   const word = customWordField.value.trim();
   const attempts = parseInt(maxAttemptsSlider.value);
 
-  shareMidgame(word, attempts, name);
+  let message = "";
+  for (let i = 0; i < word.length; i++) {
+    message += "⬜";
+  }
+  message += `\n\nTry to guess this ${word.length}-letter word on Wordevle in ${attempts} tries or less:\n\n${encodeUrl(word, name, attempts)}`;
+
+  share("Play Wordevle", message);
 }
 
 function shareMidgame(word: string, attempts: number, name: string): void {
@@ -441,7 +447,6 @@ function shareMidgame(word: string, attempts: number, name: string): void {
   }
 
   share("Play Wordevle!", message)
-
 }
 
 function encodeUrl(word: string, name: string, attempts: number) {
