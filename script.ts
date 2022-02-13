@@ -1,4 +1,5 @@
 import { url } from "inspector";
+import { isMobile } from "mobile-device-detect";
 import { decrypt, encrypt } from "./security/AesCbc";
 import { getWordOfTheDay, isWordInWordBank } from "./words/WordBank";
 
@@ -213,8 +214,7 @@ function showGameOver() {
 }
 
 function share(title: string, text: string) {
-
-  if (navigator.share) {
+  if (navigator.share && isMobile) {
     navigator.share({
       title: title,
       text: text
