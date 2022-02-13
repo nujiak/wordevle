@@ -307,26 +307,41 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
   height: 10vh;
   flex-wrap: wrap;
   user-select: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#headerCreate {
+  top: 0;
+  left: 0;
+  padding: 0.3rem !important;
+}
+
+.headerButtonIcon {
+  font-size: 5vh !important;
+  margin: 0;
+  padding: 0;
+}
+
+#nameHeader {
+  cursor: pointer;
+  margin: 0 2rem;
 }
 
 #title {
-  flex-basis: 100%;
   text-align: center;
   padding: 0;
   margin: 1vh 0 0 0;
   user-select: none;
-  cursor: pointer;
   font-weight: 500;
   font-size: 5vh;
   color: rgba(0, 0, 0, 0.87);
 }
 
 #tagline {
-  flex-basis: 100%;
   text-align: center;
   font-size: small;
   margin: -1vh 0 0 0;
-  cursor: pointer;
   font-size: 2vh;
 }
 

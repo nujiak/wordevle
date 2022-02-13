@@ -1,5 +1,4 @@
 import { url } from "inspector";
-import { encode } from "punycode";
 import { decrypt, encrypt } from "./security/AesCbc";
 import { getWordOfTheDay, isWordInWordBank } from "./words/WordBank";
 
@@ -25,6 +24,8 @@ const NAME_PARAM_KEY = "n";
 const TIME_PARAM_KEY = "t";
 
 let word: string = "HELLO";
+
+let name: string = "";
 
 const answer: string[] = word.split("");
 
@@ -240,7 +241,11 @@ function getShareMessage(isLost: boolean): string {
     message += "\n";
   }
 
-  message += `\nChallenge my score on Wordevle:\n\n${window.location.href}`
+  if (isWordOfTheDay) {
+    message += `\nGuess the Word of the Day:\n\n${window.location.origin}`;
+  } else {
+    message += `\nChallenge my score on Wordevle:\n\n${window.location.href}`;
+  }
 
   return message;
 }
@@ -421,13 +426,22 @@ function shareSetUpOptions() {
   const word = customWordField.value.trim();
   const attempts = parseInt(maxAttemptsSlider.value);
 
+  shareMidgame(word, attempts, name);
+}
+
+function shareMidgame(word: string, attempts: number, name: string): void {
   let message = "";
   for (let i = 0; i < word.length; i++) {
     message += "⬜";
   }
-  message += `\n\nTry to guess this ${word.length}-letter word on Wordevle in ${attempts} tries or less:\n\n${encodeUrl(word, name, attempts)}`;
+  if (isWordOfTheDay) {
+    message += `\n\nGuess the Word of the Day for ${new Date().toLocaleDateString()}:\n\n${window.location.origin}`
+  } else {
+    message += `\n\nTry to guess this ${word.length}-letter word on Wordevle in ${attempts} tries or less:\n\n${encodeUrl(word, name, attempts)}`;
+  }
 
   share("Play Wordevle!", message)
+
 }
 
 function encodeUrl(word: string, name: string, attempts: number) {
@@ -449,7 +463,7 @@ function setNameTime(urlParams: URLSearchParams) {
     return;
   }
   document.getElementById("wordInfo").style.display = "block";
-  const name = urlParams.get(NAME_PARAM_KEY);
+  name = urlParams.get(NAME_PARAM_KEY);
   document.getElementById("name").innerText = name;
   const time = new Date(parseInt(urlParams.get(TIME_PARAM_KEY)));
   document.getElementById("time").innerText = time.toLocaleDateString();
@@ -512,6 +526,10 @@ function init() {
   document.getElementById("tagline").addEventListener("click", () => {
     window.location.assign(window.location.origin);
   });
+
+  document.getElementById("headerCreate").onclick = openCustomWordForm;
+
+  document.getElementById("headerShare").onclick = () => shareMidgame(word, maxAttempts, name)
 
   setupResultPanel();
   setUpKeyboardInput();
