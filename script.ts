@@ -119,7 +119,9 @@ class Game {
   }
 
   private save() {
-    saveProgress(this.key, this.entries.getAllEntries());
+    setTimeout(() => {
+      saveProgress(this.key, this.entries.getAllEntries());
+    }, 0);
   }
 }
 
