@@ -303,6 +303,10 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 #header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   height: 10vh;
   flex-wrap: wrap;
@@ -354,8 +358,12 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 #resultPanel {
+  position: fixed;
+  top: 10vh;
+  bottom: 30vh;
   display: flex;
-  height: 60vh;
+  box-sizing: border-box;
+  width: 100vw;
   align-items: center;
   width: 100%;
   overflow: auto;
@@ -391,6 +399,10 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
 }
 
 #keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex: 1 1 0;
   height: 30vh;
