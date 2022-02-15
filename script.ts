@@ -43,6 +43,9 @@ class Game {
   }
 
   public deleteCharacter(): boolean {
+    if (this._isCompleted) {
+      return false;
+    }
     const success = this.entries.deleteLastCharacter();
     if (success) {
       this.save();
@@ -51,6 +54,9 @@ class Game {
   }
 
   public addCharacter(c: string): boolean {
+    if (this._isCompleted) {
+      return false;
+    }
     const success = this.entries.addCharacter(c);
     if (success) {
       this.save();
