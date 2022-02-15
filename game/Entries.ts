@@ -13,7 +13,7 @@ export class Entries {
   }
 
   private getWorkingEntry(): Entry {
-    return this.entries.at(-1);
+    return this.entries[this.entries.length - 1];
   }
 
   public addCharacter(c: string): boolean {
