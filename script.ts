@@ -346,7 +346,6 @@ function deleteCharacter() {
 }
 
 function inputCharacter(c: string) {
-
   if (isGameCompleted) {
     return;
   }
@@ -385,7 +384,7 @@ function setUpVirtualKeyboard() {
     const button = buttons[i];
     if (button.id == "enter") {
       // Enter button
-      button.addEventListener("click", game.submitEntry);
+      button.addEventListener("click", () => game.submitEntry());
     } else if (button.id == "backspace") {
       // Backspace button
       button.addEventListener("click", deleteCharacter);
