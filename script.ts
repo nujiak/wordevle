@@ -359,11 +359,12 @@ function inputCharacter(c: string) {
     return;
   }
 
-  game.addCharacter(c.toUpperCase());
+  if (game.addCharacter(c.toUpperCase())) {
+    const resultBox = resultBoxes[game.getAttemptsMade()][game.getEntryLength() - 1]
+    resultBox.label.innerText = c.toUpperCase();
+    resultBox.box.scrollIntoView({behavior: "smooth", block: "end"});
+  }
 
-  const resultBox = resultBoxes[game.getAttemptsMade()][game.getEntryLength() - 1]
-  resultBox.label.innerText = c.toUpperCase();
-  resultBox.box.scrollIntoView({behavior: "smooth", block: "end"});
 }
 
 function setUpKeyboardInput() {

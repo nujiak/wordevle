@@ -22,7 +22,7 @@ export class Entry {
       return false;
     }
 
-    if (this.letters.length > this.word.length) {
+    if (this.letters.length >= this.word.length) {
       return false;
     }
 
