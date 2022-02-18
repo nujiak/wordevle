@@ -291,7 +291,7 @@ function getShareMessage(isLost: boolean): string {
   const results = game.results;
   message += `${results.length}/${game.attempts} ` + (isLost ? "❌" : "✅") +"\n";
   if (game.isWordOfTheDay) {
-    message += `(Word of the Day ${game.startTime.toLocaleDateString()})\n`;
+    message += `Word of the Day (${game.startTime.toLocaleDateString('en-GB', {day: "numeric", month: "short", year: "numeric"})})\n`;
   }
 
   for (let i = 0; i < results.length; i++) {
@@ -473,7 +473,7 @@ function shareMidgame(word: string, attempts: number, name: string): void {
     message += "⬜";
   }
   if (game.isWordOfTheDay) {
-    message += `\n\nGuess the Word of the Day for ${new Date().toLocaleDateString()}:\n\n${window.location.origin}`
+    message += `\n\nGuess the Word of the Day:\n\n${window.location.origin}`
   } else {
     message += `\n\nTry to guess this ${word.length}-letter word on Wordevle in ${attempts} tries or less:\n\n${encodeUrl(word, name, attempts)}`;
   }
@@ -528,7 +528,7 @@ function setUpWord(): Triple<string, number, boolean> {
         break;
     }
     document.getElementById("wordOfTheDayText").style.display = "block"
-    document.getElementById("date").innerText = new Date().toLocaleDateString();
+    document.getElementById("date").innerText = new Date().toLocaleDateString('en-GB', {day: "numeric", month: "short", year: "numeric"});
     return new Triple(word, attempts, true);
   }
 
