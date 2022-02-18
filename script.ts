@@ -25,6 +25,7 @@ class Game {
   readonly isWordOfTheDay: boolean;
   private _isCompleted: boolean = false;
   readonly key: string;
+  readonly startTime;
 
   constructor(word: string, attempts: number, isWordOfTheDay: boolean) {
     this.entries = new Entries(word, attempts);
@@ -36,6 +37,7 @@ class Game {
     } else {
       this.key = window.location.search;
     }
+    this.startTime = new Date();
   }
 
   public getAttemptsMade(): number {
@@ -284,8 +286,13 @@ function share(title: string, text: string) {
 }
 
 function getShareMessage(isLost: boolean): string {
+  let message = 'Wordevle ';
+
   const results = game.results;
-  let message = 'Wordevle ' +`${results.length}/${game.attempts} ` + (isLost ? "❌" : "✅") +"\n";
+  message += `${results.length}/${game.attempts} ` + (isLost ? "❌" : "✅") +"\n";
+  if (game.isWordOfTheDay) {
+    message += `(Word of the Day ${game.startTime.toLocaleDateString()})\n`;
+  }
 
   for (let i = 0; i < results.length; i++) {
     const row = results[i];
